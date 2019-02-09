@@ -1,39 +1,37 @@
-# web
+# 교서감 웹 프론트엔드
+
+교서감 프로젝트의 웹을 담당하는 저장소입니다. 현 프로젝트를 호스팅하는 곳은 https://gyoseogam.kr 입니다.
+
+## Tech Stacks
+
+vue.js, Typescript 3.x, vue-cli, vuex, vue-router
+
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 개발 실행(Hot-reloads)
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 프로덕션 용 빌드
 ```
 npm run build
 ```
 
-### Run your tests
+### 테스트 실행
 ```
-npm run test
+# e2e test
+npm run test:e2e
+
+# unit test
+npm run test:unit
 ```
 
 ### Lints and fixes files
 ```
 npm run lint
 ```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
