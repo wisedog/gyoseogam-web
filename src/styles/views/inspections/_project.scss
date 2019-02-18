@@ -1,0 +1,23 @@
+#project-page {
+    .pass {
+        color: #39aa56;
+    }
+    section {
+        padding: 12px;
+        #brief-info {
+            display: flex;
+            justify-content: space-between;
+        }
+        #brief-info > div:nth-child(1) {
+            flex: 0 1 55%;
+        }
+        #brief-info > div:nth-child(2) {
+            flex: 0 1 45%;
+        }
+        .check-result {
+            .item {
+                padding: 4px;
+            }
+        }
+    }
+}

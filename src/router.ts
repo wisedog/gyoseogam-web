@@ -21,5 +21,15 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/publics/About.vue'),
     },
+    {
+      path: '/project/:service/:owner/:project',
+      name: 'project',
+      component: () => import('./views/inspections/Project.vue'),
+    },
+    {
+      path: '/project/:service/:owner/:project/:commit',
+      name: 'commitResult',
+      component: () => import('./views/inspections/CommitResult.vue'),
+    },
   ],
 });

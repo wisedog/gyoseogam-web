@@ -1,6 +1,6 @@
 {
   "name": "gyoseogam",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,6 +10,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "moment": "^2.24.0",
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.22",
     "vue-class-component": "^6.0.0",
@@ -18,6 +20,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-e2e-cypress": "^3.4.0",

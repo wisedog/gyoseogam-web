@@ -13,4 +13,28 @@ article {
             font-size: 18px;
         }
     }
+
+    section#recent {
+        padding: 10px;
+        
+        h3 {
+            text-align:center;
+            margin-top: 20px;
+        }
+        ul {
+            max-width: 60%;
+            margin: 0 auto;
+            li {
+                border: 1px solid gray;
+                padding: 12px;
+                margin-bottom: 10px;
+                div {
+                    margin-bottom: 4px;
+                }
+                div > span {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
 }

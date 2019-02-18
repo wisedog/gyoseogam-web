@@ -1,26 +1,26 @@
 <template>
     <div id="project-page">
         <article>
-            <h1>{{ projectInfo.owner }}/{{ projectInfo.projectName }}</h1>
+            <h1>{{ commitInfo.owner }}/{{ commitInfo.projectName }}</h1>
         </article>
         <main>
             <section>
                 <div id="brief-info">
                     <div>
                         <h2 class="pass">
-                            <small class="commit-branch" title="master">{{ projectInfo.branch }}</small>
-                            {{ projectInfo.message }}
+                            <small class="commit-branch" title="master">{{ commitInfo.branch }}</small>
+                            {{ commitInfo.message }}
                         </h2>
                         <div>
                             <ul class="list-icon">
                                 <li>
-                                    <span>Commit</span>{{ projectInfo.id }}
+                                    <span>Commit</span>{{ commitInfo.id }}
                                 </li>
                                 <li>
-                                    <span>Branch</span>{{ projectInfo.branch }}
+                                    <span>Branch</span>{{ commitInfo.branch }}
                                 </li>
                                 <li>
-                                    {{ projectInfo.committer ? projectInfo.committer.name : '' }}
+                                    {{ commitInfo.committer ? commitInfo.committer.name : '' }}
                                 </li>
                             </ul>
                         </div>
@@ -30,9 +30,9 @@
                             <span>passed</span>
                         </h3>
                         <ul class="list-icon">
-                            <li>총 {{ projectInfo.totalPages - projectInfo.excludePages}} 장 ( {{ projectInfo.excludePages }} 장 제외)</li>
-                            <li>총 {{ projectInfo.totalSentences}} 문장</li>
-                            <li>총 {{ projectInfo.totalSuggests}} 수정 제안</li>
+                            <li>총 {{ commitInfo.totalPages - commitInfo.excludePages}} 장 ( {{ commitInfo.excludePages }} 장 제외)</li>
+                            <li>총 {{ commitInfo.totalSentences}} 문장</li>
+                            <li>총 {{ commitInfo.totalSuggests}} 수정 제안</li>
                         </ul>
                     </div>
                 </div>
@@ -66,6 +66,10 @@ export default class Project extends Vue {
         return this.$store.state.projectDetail;
     }
 
+    private get commitInfo() {
+        return this.$store.state.checkBrief;
+    }
+
     private get projectName() {
         return this.$store.getters.repositoryName;
     }
@@ -76,10 +80,11 @@ export default class Project extends Vue {
 
     private async created() {
         await this.$store.dispatch(
-            'fetchProjectInfo', {
+            'fetchCheckBrief', {
                 service: this.$route.params.service,
                 owner: this.$route.params.owner,
                 project: this.$route.params.project,
+                commit: this.$route.params.commit,
             },
         );
 
@@ -88,7 +93,7 @@ export default class Project extends Vue {
                 service: this.$route.params.service,
                 owner: this.$route.params.owner,
                 project: this.$route.params.project,
-                commit: this.$store.state.projectDetail.id,
+                commit: this.$route.params.commit,
             },
         );
     }
