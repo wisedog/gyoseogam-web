@@ -4,7 +4,11 @@ import router from './router';
 import store from '@/store';
 import './registerServiceWorker';
 
+import AppConfig from '@/config';
+
 Vue.config.productionTip = false;
+Vue.config.silent = !AppConfig.isDebugAvailable();
+Vue.config.devtools = AppConfig.isDebugAvailable();
 
 new Vue({
   router,

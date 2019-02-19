@@ -1,6 +1,6 @@
 {
-  "name": "web",
-  "short_name": "web",
+  "name": "gyoseogam",
+  "short_name": "gyoseogam",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

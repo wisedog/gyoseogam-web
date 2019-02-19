@@ -7,6 +7,8 @@
 
 <style lang="scss">
 @import '@/styles/styles.scss';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/semanticui.scss';
 </style>
 
 <script lang="ts">

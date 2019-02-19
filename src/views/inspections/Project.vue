@@ -1,56 +1,53 @@
 <template>
     <div id="project-page">
-        <article>
-            <h1>{{ projectInfo.owner }}/{{ projectInfo.projectName }}</h1>
-        </article>
-        <main>
+        <article v-if="projectInfo.brief">
             <section>
+                <h1>{{ projectInfo.brief.owner }}/{{ projectInfo.brief.projectName }}</h1>
+            </section>
+            <section>
+                <h3>최근 검사 결과</h3>
                 <div id="brief-info">
                     <div>
                         <h2 class="pass">
                             <small class="commit-branch" title="master">{{ projectInfo.branch }}</small>
-                            {{ projectInfo.message }}
+                            {{ projectInfo.latest.message }}
                         </h2>
                         <div>
                             <ul class="list-icon">
                                 <li>
-                                    <span>Commit</span>{{ projectInfo.id }}
+                                    <span>Commit</span>{{ projectInfo.latest.id }}
                                 </li>
                                 <li>
-                                    <span>Branch</span>{{ projectInfo.branch }}
+                                    <span>Branch</span>{{ projectInfo.latest.branch }}
                                 </li>
                                 <li>
-                                    {{ projectInfo.committer ? projectInfo.committer.name : '' }}
+                                    {{ projectInfo.latest.committer ? projectInfo.latest.committer.name : '' }}
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div>
-                        <h3 class="pass">
-                            <span>passed</span>
+                        <h3 class="pass" v-if="projectInfo.brief.status !== 500">
+                            <span>검사 성공</span>
+                        </h3>
+                        <h3 v-else>
+                            <span>검사 실패</span>
                         </h3>
                         <ul class="list-icon">
-                            <li>총 {{ projectInfo.totalPages - projectInfo.excludePages}} 장 ( {{ projectInfo.excludePages }} 장 제외)</li>
-                            <li>총 {{ projectInfo.totalSentences}} 문장</li>
-                            <li>총 {{ projectInfo.totalSuggests}} 수정 제안</li>
+                            <li>총 {{ projectInfo.latest.totalPages - projectInfo.latest.excludePages}} 장 ( {{ projectInfo.latest.excludePages }} 장 제외)</li>
+                            <li>총 {{ projectInfo.latest.totalSentences}} 문장</li>
+                            <li>총 {{ projectInfo.latest.totalSuggests}} 수정 제안</li>
                         </ul>
                     </div>
                 </div>
             </section>
-            <section class="check-result">
-                <div v-for="(item, idx) in checkResult" :key="idx">
-                    <h3 class="item">{{ item.file }}</h3>
-                    <div class="item">{{ item.contents }}</div>
-                    <div v-for="(suggest, idx1) in item.suggestions" :key="idx1">
-                        <div style="font-size: 18px; margin-top: 12px;">
-                            <strong>{{ suggest.token }} -> <span v-for="(x, idx) in suggest.suggestions" :key="idx">{{ x }}</span></strong>
-                        </div>
-                        <div>{{ suggest.info }}</div>
-                    </div>
-                    
-                </div>
+            <section>
+                <div>과거 검사 이력 보기(TODO)</div>
             </section>
-        </main>
+        </article>
+        <article v-else>
+            <div>Loading...</div>
+        </article>
     </div>
 </template>
 
@@ -80,15 +77,6 @@ export default class Project extends Vue {
                 service: this.$route.params.service,
                 owner: this.$route.params.owner,
                 project: this.$route.params.project,
-            },
-        );
-
-        await this.$store.dispatch(
-            'fetchCheckResult', {
-                service: this.$route.params.service,
-                owner: this.$route.params.owner,
-                project: this.$route.params.project,
-                commit: this.$store.state.projectDetail.id,
             },
         );
     }
